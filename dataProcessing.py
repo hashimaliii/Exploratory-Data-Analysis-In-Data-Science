@@ -85,7 +85,7 @@ def handle_duplicates_and_anomalies(df):
         outliers = (df[col] < lower_bound) | (df[col] > upper_bound)
         print(f"Outliers detected in {col}: {outliers.sum()} rows")
 
-        df = df[~outliers]
+        # df = df[~outliers]
 
     return df
 
