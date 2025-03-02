@@ -47,5 +47,4 @@ def merge_data(folder_path = "raw"):
     data["demand_mwh"] = pd.to_numeric(data["demand_mwh"], errors='coerce')
     data.sort_values(by="datetime", inplace=True)
     
-    data.to_csv("raw_merged_data.csv", index=False)
     return data
