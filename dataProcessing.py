@@ -15,13 +15,6 @@ def feature_engineering(data):
     data["season"] = data["month"].apply(lambda x: 'Winter' if x in [12, 1, 2] else 'Spring' if x in [3, 4, 5] else 'Summer' if x in [6, 7, 8] else 'Fall')
     data = pd.get_dummies(data, columns=['season'], drop_first=True)
 
-    # Identify numerical columns for normalization/standardization
-    num_cols = data.select_dtypes(include=['number']).columns
-
-    # Choose either StandardScaler (Z-score normalization) or MinMaxScaler (scales to [0,1])
-    scaler = StandardScaler()
-    data[num_cols] = scaler.fit_transform(data[num_cols])
-
     return data
 
 def data_type_conversions(data):
@@ -89,6 +82,15 @@ def handle_duplicates_and_anomalies(df):
         # df = df[~outliers]
 
     return df
+
+def normalize_data(data):
+    # Identify numerical columns for normalization/standardization
+    num_cols = data.select_dtypes(include=['number']).columns
+
+    # Choose either StandardScaler (Z-score normalization) or MinMaxScaler (scales to [0,1])
+    scaler = StandardScaler()
+    data[num_cols] = scaler.fit_transform(data[num_cols])
+    return data
 
 def process_data(df):
 

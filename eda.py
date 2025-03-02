@@ -220,6 +220,9 @@ def time_series_analysis(df, date_col, target_col, period=24):
     else:
         print("\n⚠️ The time series is non-stationary (p-value >= 0.05). Consider differencing or detrending.")
 
+    # Reset index after analysis
+    df.reset_index(inplace=True)
+
 def perform_eda(df):
     statistical_summary_result = statistical_summary(df)
     print(statistical_summary_result)

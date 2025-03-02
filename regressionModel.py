@@ -22,7 +22,7 @@ def regression_model(df, target, time_column, test_size=0.2):
     """
 
     # Ensure time_column is in datetime format
-    df[time_column] = pd.to_datetime(df[time_column])
+    # df[time_column] = pd.to_datetime(df[time_column])
 
     # Define Features (Excluding Non-Numeric Columns)
     feature_cols = ["hour", "day", "month", "year", "day_of_week", "is_weekend", "season_Spring", "season_Summer", "season_Winter"]
