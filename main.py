@@ -28,4 +28,4 @@ if __name__ == "__main__":
     normalized_df.to_csv("normalized_data.csv", index=False)
 
     # Regression Model
-    model, predictions = regressionModel.regression_model(normalized_df, target="demand_mwh", time_column="datetime")
+    model, predictions = regressionModel.regression_model(cleaned_df, target="demand_mwh", time_column="datetime")

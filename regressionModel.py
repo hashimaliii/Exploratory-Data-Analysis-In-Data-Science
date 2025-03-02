@@ -29,6 +29,9 @@ def regression_model(df, target, time_column, test_size=0.2):
     if "temperature" in df.columns:
         feature_cols.append("temperature")  # Include temperature if available
 
+    province_columns = [col for col in df.columns if col.startswith("Province_")]
+    feature_cols.extend(province_columns)
+
     X = df[feature_cols]
     y = df[target]
 

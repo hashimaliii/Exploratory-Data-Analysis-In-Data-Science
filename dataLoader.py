@@ -17,7 +17,7 @@ def load_electricity_data(folder_path):
     electricity_df["period"] = pd.to_datetime(electricity_df["period"], errors='coerce')
     electricity_df["value"] = electricity_df["value"].astype(str).str.extract(r'([0-9]+\.?[0-9]*)')[0]
     electricity_df["value"] = pd.to_numeric(electricity_df["value"], errors='coerce')
-    electricity_df = electricity_df.rename(columns={"period": "datetime", "value": "demand_mwh"})
+    electricity_df = electricity_df.rename(columns={"period": "datetime", "value": "demand_mwh", "subba-name" : "Province"})
     electricity_df["datetime"] = pd.to_datetime(electricity_df["datetime"], errors='coerce', utc=True)
     return electricity_df.dropna()
 

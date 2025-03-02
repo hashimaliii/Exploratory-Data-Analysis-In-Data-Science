@@ -223,7 +223,31 @@ def time_series_analysis(df, date_col, target_col, period=24):
     # Reset index after analysis
     df.reset_index(inplace=True)
 
+def check_demand_in_each_city(data):
+    # Extract province columns (all columns starting with "Province_")
+    province_columns = [col for col in data.columns if col.startswith("Province_")]
+    
+    # Multiply each one-hot encoded province column by the demand to distribute demand correctly
+    province_demand = data[province_columns].multiply(data["demand_mwh"], axis=0).sum()
+
+    # Sort values
+    province_demand = province_demand.sort_values()
+
+    # Plot
+    plt.figure(figsize=(12, 6))
+    sns.barplot(y=province_demand.index.str.replace("Province_", ""), x=province_demand.values, palette="coolwarm", orient='h')
+
+    plt.ylabel("Province")
+    plt.xlabel("Total Electricity Demand (MWh)")
+    plt.title("Electricity Demand by Province")
+    plt.show()
+
+    return province_demand
+
 def perform_eda(df):
+
+    check_demand_in_each_city(df)
+
     statistical_summary_result = statistical_summary(df)
     print(statistical_summary_result)
 

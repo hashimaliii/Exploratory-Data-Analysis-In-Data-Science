@@ -14,6 +14,10 @@ def feature_engineering(data):
     data["is_weekend"] = data["day_of_week"].apply(lambda x: 1 if x >= 5 else 0)
     data["season"] = data["month"].apply(lambda x: 'Winter' if x in [12, 1, 2] else 'Spring' if x in [3, 4, 5] else 'Summer' if x in [6, 7, 8] else 'Fall')
     data = pd.get_dummies(data, columns=['season'], drop_first=True)
+    data = pd.get_dummies(data, columns=['Province'], drop_first=True)
+    # Convert only the new dummy columns to int
+    dummy_cols = [col for col in data.columns if 'Province_' in col]
+    data[dummy_cols] = data[dummy_cols].astype(int)
 
     return data
 
